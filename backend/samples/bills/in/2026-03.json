@@ -1,0 +1,23 @@
+{
+ "utility": "Sample Electricity Supplier (demo)",
+ "customer_category": "Industrial, time of use (India, sample)",
+ "period_start": "2026-03-02",
+ "period_end": "2026-03-29",
+ "kwh_peak": 7932,
+ "kwh_normal": 26824,
+ "kwh_offpeak": 3115,
+ "kwh_total": 37871,
+ "max_demand_kva": 167.0,
+ "demand_unit": "kVA",
+ "rate_peak": 9.0,
+ "rate_normal": 7.5,
+ "rate_offpeak": 6.0,
+ "demand_rate": 450.0,
+ "energy_charge": 291258,
+ "demand_charge": 75150,
+ "other_charges": 2411,
+ "power_factor": 0.93,
+ "power_factor_penalty": 0,
+ "total_amount": 368819,
+ "currency": "INR"
+}

@@ -1,0 +1,23 @@
+{
+ "utility": "Sample Electricity Supplier (demo)",
+ "customer_category": "Industrial, time of use (Nepal, sample)",
+ "period_start": "2025-12-01",
+ "period_end": "2025-12-31",
+ "kwh_peak": 12015,
+ "kwh_normal": 28940,
+ "kwh_offpeak": 2651,
+ "kwh_total": 43606,
+ "max_demand_kva": 168.7,
+ "demand_unit": "kVA",
+ "rate_peak": 12.5,
+ "rate_normal": 10.5,
+ "rate_offpeak": 7.0,
+ "demand_rate": 280.0,
+ "energy_charge": 472614,
+ "demand_charge": 47236,
+ "other_charges": 1500,
+ "power_factor": 0.82,
+ "power_factor_penalty": 18905,
+ "total_amount": 540255,
+ "currency": "NPR"
+}

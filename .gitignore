@@ -1,0 +1,23 @@
+.venv/
+__pycache__/
+.pytest_cache/
+# Local secrets. Keep example files safe to commit.
+**/.env
+**/.env.*
+!**/.env.example
+*.pem
+*.key
+*service-account*.json
+**/secrets/
+
+# Local build and generated data
+.meterzero_deck_build/
+backend/artifacts/
+backend/data/
+backend/plants/
+backend/static/
+frontend/node_modules/
+frontend/dist/
+tools/demo-video/.tts/
+tools/demo-video/out/*
+!tools/demo-video/out/meterzero-story-demo-v9.mp4

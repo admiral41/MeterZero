@@ -1,0 +1,23 @@
+{
+ "utility": "Sample Electricity Supplier (demo)",
+ "customer_category": "Industrial, time of use (United States, sample)",
+ "period_start": "2026-03-02",
+ "period_end": "2026-03-29",
+ "kwh_peak": 10435,
+ "kwh_normal": 25134,
+ "kwh_offpeak": 2302,
+ "kwh_total": 37871,
+ "max_demand_kva": 150.3,
+ "demand_unit": "kW",
+ "rate_peak": 0.2,
+ "rate_normal": 0.12,
+ "rate_offpeak": 0.08,
+ "demand_rate": 8.0,
+ "energy_charge": 5287,
+ "demand_charge": 1202,
+ "other_charges": 43,
+ "power_factor": 0.93,
+ "power_factor_penalty": 0,
+ "total_amount": 6532,
+ "currency": "USD"
+}

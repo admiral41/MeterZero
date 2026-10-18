@@ -1,0 +1,23 @@
+{
+ "utility": "Sample Electricity Supplier (demo)",
+ "customer_category": "Industrial, time of use (Australia, sample)",
+ "period_start": "2026-01-01",
+ "period_end": "2026-01-31",
+ "kwh_peak": 14907,
+ "kwh_normal": 22514,
+ "kwh_offpeak": 8281,
+ "kwh_total": 45702,
+ "max_demand_kva": 187.0,
+ "demand_unit": "kVA",
+ "rate_peak": 0.26,
+ "rate_normal": 0.17,
+ "rate_offpeak": 0.11,
+ "demand_rate": 14.0,
+ "energy_charge": 8614,
+ "demand_charge": 2618,
+ "other_charges": 75,
+ "power_factor": 0.91,
+ "power_factor_penalty": 0,
+ "total_amount": 11307,
+ "currency": "AUD"
+}

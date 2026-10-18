@@ -1,0 +1,6 @@
+-r requirements.txt
+pytest>=8.0
+httpx>=0.27
+pillow>=10.0       # scripts/make_samples.py and make_bills.py
+pyflakes>=3.2       # lint: python -m pyflakes meterzero server scripts tests
+vulture>=2.11       # dead code: python -m vulture meterzero server scripts

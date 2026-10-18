@@ -1,0 +1,122 @@
+@import 'tailwindcss';
+
+/* Design tokens. A calm, light theme: white surfaces on a soft grey canvas, the logo's navy for
+   actions and its green as the accent, and colour only where it carries meaning
+   (green = saving, red = waste, amber = caution). */
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --color-canvas: #f5f6f8;      /* page background */
+  --color-surface: #ffffff;     /* cards, sidebar, inputs */
+  --color-subtle: #f8f9fb;      /* inset areas, hover rows */
+  --color-muted: #eef0f3;       /* chips, secondary buttons */
+  --color-muted-strong: #e2e5ea;
+  --color-line: #e5e7eb;        /* borders */
+  --color-line-strong: #d0d5dd;
+
+  --color-fg: #111827;          /* primary text */
+  --color-fg-2: #4b5563;        /* secondary text */
+  --color-fg-3: #6b7280;        /* labels, captions */
+  --color-fg-4: #9ca3af;        /* placeholders, faint */
+
+  --color-brand: #0c304a;        /* logo navy: buttons, links, selection */
+  --color-brand-strong: #071f31;
+  --color-brand-soft: #edf3f7;
+  --color-brand-line: #c4d5e2;
+  --color-accent: #2da960;       /* logo green */
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-canvas);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'cv11', 'ss01';
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line-strong) transparent;
+}
+
+/* Cards: white, a hairline border and a soft shadow. No gradients, no glow. */
+.panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgb(16 24 40 / 0.04), 0 1px 3px rgb(16 24 40 / 0.04);
+}
+
+/* Numbers line up in columns but stay in the same typeface as the text. */
+.num {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* Markdown answers from the AI assistant */
+.prose-ai {
+  line-height: 1.65;
+  color: var(--color-fg-2);
+}
+.prose-ai p {
+  margin: 0.5rem 0;
+}
+.prose-ai strong {
+  color: var(--color-fg);
+  font-weight: 600;
+}
+.prose-ai ul,
+.prose-ai ol {
+  margin: 0.4rem 0 0.4rem 1.25rem;
+}
+.prose-ai ul {
+  list-style: disc;
+}
+.prose-ai ol {
+  list-style: decimal;
+}
+.prose-ai li {
+  margin: 0.25rem 0;
+}
+.prose-ai h1,
+.prose-ai h2,
+.prose-ai h3 {
+  color: var(--color-fg);
+  font-weight: 600;
+  margin: 1rem 0 0.35rem;
+}
+.prose-ai table {
+  border-collapse: collapse;
+  margin: 0.5rem 0;
+}
+.prose-ai th,
+.prose-ai td {
+  border: 1px solid var(--color-line);
+  padding: 0.3rem 0.55rem;
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgb(220 38 38 / 0.45); }
+  100% { box-shadow: 0 0 0 8px rgb(220 38 38 / 0); }
+}
+.pulse-bad {
+  animation: pulse-ring 1.6s ease-out infinite;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-bad { animation: none; }
+}

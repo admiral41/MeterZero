@@ -1,0 +1,23 @@
+{
+ "utility": "Sample Electricity Supplier (demo)",
+ "customer_category": "Industrial, time of use (Canada, sample)",
+ "period_start": "2026-01-01",
+ "period_end": "2026-01-31",
+ "kwh_peak": 21133,
+ "kwh_normal": 11407,
+ "kwh_offpeak": 13161,
+ "kwh_total": 45701,
+ "max_demand_kva": 168.3,
+ "demand_unit": "kW",
+ "rate_peak": 0.158,
+ "rate_normal": 0.122,
+ "rate_offpeak": 0.087,
+ "demand_rate": 12.0,
+ "energy_charge": 5876,
+ "demand_charge": 2020,
+ "other_charges": 64,
+ "power_factor": 0.91,
+ "power_factor_penalty": 0,
+ "total_amount": 7960,
+ "currency": "CAD"
+}

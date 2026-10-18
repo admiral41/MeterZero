@@ -1,0 +1,23 @@
+{
+ "utility": "Sample Electricity Supplier (demo)",
+ "customer_category": "Industrial, time of use (Japan, sample)",
+ "period_start": "2026-02-01",
+ "period_end": "2026-02-28",
+ "kwh_peak": 11683,
+ "kwh_normal": 17734,
+ "kwh_offpeak": 7320,
+ "kwh_total": 36737,
+ "max_demand_kva": 148.8,
+ "demand_unit": "kW",
+ "rate_peak": 27.0,
+ "rate_normal": 22.0,
+ "rate_offpeak": 17.0,
+ "demand_rate": 1800.0,
+ "energy_charge": 849950,
+ "demand_charge": 267840,
+ "other_charges": 9643,
+ "power_factor": 0.92,
+ "power_factor_penalty": 0,
+ "total_amount": 1127433,
+ "currency": "JPY"
+}
