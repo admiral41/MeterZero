@@ -78,7 +78,13 @@ if ($Auth -eq "vertex") {
 Write-Host "`n4/4  Building and deploying (about 5-10 minutes the first time)" -ForegroundColor Cyan
 gcloud run deploy $Service --source . --region $Region --allow-unauthenticated `
     --memory 2Gi --cpu 2 --timeout 3600 --session-affinity --min-instances 0 --max-instances 3 @gemini
+if ($LASTEXITCODE -ne 0) {
+    throw "Cloud Run deployment failed (exit code $LASTEXITCODE). Fix the reported error and run the deploy command again."
+}
 
 $url = gcloud run services describe $Service --region $Region --format="value(status.url)"
+if ($LASTEXITCODE -ne 0 -or -not $url) {
+    throw "Cloud Run did not return a service URL. Check the deployment output above."
+}
 Write-Host "`nMeterZero is live at: $url" -ForegroundColor Green
 Write-Host "Check it:  $url/api/health   and   $url/api/ai/status  (should say connected: true)"

@@ -1,158 +1,67 @@
 <div align="center">
 
-<img src="frontend/public/brand/logo.png" alt="MeterZero" width="420" />
+<img src="frontend/public/brand/logo.png" alt="MeterZero" width="360" />
 
 ### One meter. Every machine. Every product.
 
-Energy intelligence for factories: MeterZero splits a plant's single electricity meter into every machine and
-every product, checks the electricity bill line by line, and shows what to fix first. **Ask MeterZero**, the
-assistant powered by **Google Gemini**, reads bills and logbooks from a photo, audits the week with the
-engine's tools and explains every number.
+Energy intelligence for factories. MeterZero turns a plant's whole-site electricity data into machine- and product-level insight, checks bills, and helps teams find practical savings.
 
-![Gemini](https://img.shields.io/badge/Google_Gemini-function_calling_·_vision_·_audio-1a73e8?logo=googlegemini&logoColor=white)
-![Cloud Run](https://img.shields.io/badge/Google_Cloud-Cloud_Run-4285F4?logo=googlecloud&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3.12+-3776AB?logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
-![React](https://img.shields.io/badge/React_19-TypeScript-61DAFB?logo=react&logoColor=black)
-![Three.js](https://img.shields.io/badge/Three.js-3D_twin-000000?logo=threedotjs&logoColor=white)
+**[Open the live prototype](https://meterzero-zwb5gtsu3q-uc.a.run.app)** · **[Watch the AI Builder Cup demo](https://www.youtube.com/watch?v=furWgHMbR9c)** · **[View the architecture](docs/architecture.svg)**
 
-**[Watch the AI Builder Cup prototype demo](https://www.youtube.com/watch?v=furWgHMbR9c)** · **[Deploy to Cloud Run](DEPLOY.md)**
-
-> **Live prototype:** Add the public Cloud Run URL here after deployment.
-
-<img src="docs/screenshots/digital-twin.png" alt="The MeterZero digital twin" width="100%" />
+![Google Gemini](https://img.shields.io/badge/Google-Gemini-4285F4?logo=googlegemini&logoColor=white)
+![Google Cloud Run](https://img.shields.io/badge/Google_Cloud-Run-34A853?logo=googlecloud&logoColor=white)
+![React](https://img.shields.io/badge/React-TypeScript-3178C6?logo=react&logoColor=white)
+![FastAPI](https://img.shields.io/badge/API-FastAPI-009688?logo=fastapi&logoColor=white)
 
 </div>
 
 ---
 
-## Contents
+## At a glance
 
-- [The problem](#the-problem)
-- [What MeterZero does](#what-meterzero-does)
-- [How Gemini is used](#how-gemini-is-used)
-- [Architecture](#architecture)
-- [Results](#results)
-- [Run it locally](#run-it-locally)
-- [Deploy to Google Cloud Run](#deploy-to-google-cloud-run)
-- [Configuration](#configuration)
-- [Project structure](#project-structure)
-- [Testing](#testing)
-- [Limitations](#limitations)
+Factories often receive one electricity bill for an entire site. That total hides which machines and products use the energy, when waste occurs, and whether the bill reflects actual operations. MeterZero combines a simulated plant, its schedule, and its main-meter data to estimate machine-level usage, allocate energy to products, inspect bills, and prioritize savings opportunities.
 
-## The problem
+The prototype includes an interactive overview, a 3D digital twin, bill and document readers, evidence-backed savings analysis, schedule what-if scenarios, regional tariff settings, and a Gemini-powered assistant.
 
-Small and mid-size factories pay **one electricity bill**. They can't tell which machine or which product the
-money went on, so they can't price products, find waste or report carbon per unit. Fitting a meter to every
-machine is expensive, the bill itself can't be checked, and production is often still logged on paper.
+## Prototype and demo
 
-## What MeterZero does
+- **Live application:** [meterzero-zwb5gtsu3q-uc.a.run.app](https://meterzero-zwb5gtsu3q-uc.a.run.app)
+- **API health:** [/api/health](https://meterzero-zwb5gtsu3q-uc.a.run.app/api/health)
+- **Gemini status:** [/api/ai/status](https://meterzero-zwb5gtsu3q-uc.a.run.app/api/ai/status)
+- **Video demonstration:** [Watch on YouTube](https://www.youtube.com/watch?v=furWgHMbR9c)
 
-| | |
-|---|---|
-| **Overview** | The week's energy and bill, a morning check, what to fix first (ranked by money, with a likely range) and an animated 3D flow of every kWh from the meter to each product. |
-| **Digital twin** | An editor-style 3D view (hierarchy, scene, inspector, timeline). Play the day and watch current flow to each machine; lights follow the shift; waste shows up red. Fly with W A S D, frame with F. |
-| **Bills & paperwork** | Six months of bills checked line by line: charges that don't add up, power-factor surcharges, demand above usual, peak-price share, units against the meter. The bill is split by machine and by product. Gemini reads bill, logbook and nameplate photos. |
-| **Find savings** | Every finding priced, with the chart behind it. Gemini can run a full energy-audit review on top. |
-| **What if** | Move a production line earlier or later and see the bill, peak demand, clashes and staffing change. |
-| **Ask MeterZero** | A Gemini assistant on every page that knows what's on screen, by text or voice, and shows every lookup it made. |
-| **Accuracy** | Every figure compared with hidden meters on a week the model never saw. |
-| **Plant designer** | Build any plant from 15 machine types, then simulate it and train MeterZero on it in about a minute. |
-| **Regions** | Typical industrial time-of-use prices, currency, demand units and grid CO2 for the US (default), Canada, Japan, Australia, India and Nepal. |
+## How it works
 
-<table>
-  <tr>
-    <td width="50%"><img src="docs/screenshots/overview.png" alt="Overview" /><br /><sub><b>Overview</b>: the week and what to fix first</sub></td>
-    <td width="50%"><img src="docs/screenshots/energy-flow.png" alt="Energy flow" /><br /><sub><b>Energy flow</b>: every kWh, meter to product</sub></td>
-  </tr>
-  <tr>
-    <td><img src="docs/screenshots/bill-check.png" alt="Bill check" /><br /><sub><b>Bill check</b>: overcharges and surcharges found</sub></td>
-    <td><img src="docs/screenshots/find-savings.png" alt="Find savings" /><br /><sub><b>Find savings</b>: priced findings with evidence</sub></td>
-  </tr>
-  <tr>
-    <td><img src="docs/screenshots/what-if.png" alt="What if" /><br /><sub><b>What if</b>: try a schedule change first</sub></td>
-    <td><img src="docs/screenshots/accuracy.png" alt="Accuracy" /><br /><sub><b>Accuracy</b>: checked against hidden meters</sub></td>
-  </tr>
-</table>
+1. **Estimate energy by machine.** MeterZero learns machine load patterns from the plant schedule and whole-site meter, then reconciles machine estimates so they add up to the main meter.
+2. **Connect energy to operations.** The product and schedule model attributes energy and cost across machines, production, and time-of-use periods.
+3. **Find what to investigate.** Bill checks, overnight usage, schedule scenarios, and savings rankings surface actionable issues with supporting evidence.
+4. **Ask Gemini.** Gemini can read bill, logbook, and equipment-nameplate photos, support energy audits with typed tools, and explain results in plain language.
 
-## How Gemini is used
+Demo results use simulated plants with hidden machine meters, which lets the prototype compare its estimates with known values. They are not claims of measured performance at a live factory.
 
-MeterZero does the measuring; Gemini does what a language model is good at: reading messy paper, planning an
-investigation, comparing options and explaining. It only ever sees the engine's tool outputs, never raw data or
-the hidden meters, and every answer shows the lookups behind it.
+## Google services and challenge fit
 
-| Gemini capability | Used for |
-|---|---|
-| **Function calling** | An energy audit: Gemini plans the review, calls up to 25 lookups across **15 typed tools** (tariff, waste, schedule shifts, repairs, sensors, carbon…), rejects options that clash with production and returns ranked findings |
-| **Structured output** | Findings become cards with savings, ranges and confidence; photos become typed, validated fields |
-| **Vision** | Electricity bills, handwritten production logbooks and machine nameplates, read from a photo |
-| **Audio** | Voice questions on the shop floor |
-| **Context** | The floating assistant receives what's on screen: the time and machine in the twin, the bill being checked, the change being tried |
+**Challenge:** Manufacturing — Intelligent Operations & Industrial Efficiency. Energy efficiency and sustainability are important outcomes of the manufacturing use case.
 
-Code: [`backend/meterzero/agent.py`](backend/meterzero/agent.py) (tools and agent),
-[`backend/meterzero/vision.py`](backend/meterzero/vision.py) and [`bill.py`](backend/meterzero/bill.py) (photos),
-[`backend/server/ai.py`](backend/server/ai.py) (streaming API routes).
+**Google services:** Gemini powers document understanding and the energy-audit assistant. Cloud Run hosts the web application and API. Cloud Build builds the container image, Artifact Registry stores it, and Secret Manager supplies the Gemini API key to the service at runtime.
 
-### Firebase and Firestore
-
-Firebase and Cloud Firestore are **not currently integrated** in this version. Plant specifications and trained
-results are stored as files by the FastAPI service. The deployment guide describes the current architecture; do
-not represent Firebase or Firestore as part of the submitted implementation. A future production deployment
-could move user accounts and durable, shared plant data to Firebase Authentication and Firestore.
+**Submission brief:** MeterZero helps manufacturers find hidden energy waste by estimating machine- and product-level electricity use from a facility's main meter. Gemini reads bills and equipment records and supports evidence-based energy audits. Cloud Run hosts the prototype, with Cloud Build, Artifact Registry, and Secret Manager supporting deployment and API-key handling.
 
 ## Architecture
 
-```mermaid
-flowchart LR
-    subgraph Browser["Browser · React + Three.js"]
-        UI["Pages, 3D twin,<br/>Ask MeterZero"]
-    end
-    subgraph Run["Google Cloud Run · one container"]
-        API["FastAPI<br/>server/"]
-        Engine["MeterZero engine<br/>meterzero/"]
-        Agent["Gemini tools<br/>agent.py"]
-    end
-    Gemini["Google Gemini<br/>(AI Studio key or Vertex AI)"]
-    Secret["Secret Manager<br/>gemini-api-key"]
+![MeterZero prototype architecture](docs/architecture.svg)
 
-    UI -- "REST + streamed AI steps" --> API
-    API --> Engine
-    API --> Agent
-    Agent -- "function calls" --> Engine
-    Agent <--> Gemini
-    Secret -. "GEMINI_API_KEY" .-> Run
-```
+The diagram shows the deployed prototype path. Plant configurations and generated results are currently file-based in the service container. For durable shared data across Cloud Run instances, a production version can add a managed data store such as Firestore.
 
-**The engine**, from one meter and the production schedule:
+## Run locally
 
-1. Gradient-boosted models learn each machine's power from the schedule and the meter's pattern.
-2. A reconciliation step shares out the meter exactly, so machines always add up to what was measured.
-3. Calibrated ranges ("likely between") come with every figure, per minute, per batch and per day.
-4. On top: energy per product, overnight waste alerts, time-of-use pricing, schedule what-ifs, bill checks and
-   advice on where the next meter pays off.
+### Requirements
 
-## Results
+- Python 3.12 or newer
+- Node.js 20.19 or newer
+- Git
 
-On a simulated plant with a hidden meter on every machine, measured on a week the model never saw:
-
-| | |
-|---|---|
-| Accuracy from one meter | **88.1%** (spreadsheet baseline: 76.5%) |
-| With 2 recommended extra meters | **95.4%** (random placement: 92.0%) |
-| "Likely between" ranges: minute / batch / machine-day | 90% / 98% / 80% |
-| Compressed-air leak injected mid-week | flagged every night; fixing it is worth about **$369 a month** |
-| Best clash-free schedule change | line C three hours earlier: about **$179 a month** |
-| Energy that made nothing | 12% of the week |
-| Custom plants (bakery, garment templates) | about 90% accurate after a one-minute training run |
-
-## Run it locally
-
-**Requirements:** Python 3.12+, Node.js 20.19+, Git.
-
-### 1. Install prerequisites
-
-Install **Python 3.12+**, **Node.js 20.19+**, and Git. In PowerShell, clone the repository and create a Python
-virtual environment:
+### 1. Clone and install the backend
 
 ```powershell
 git clone https://github.com/admiral41/MeterZero.git
@@ -162,23 +71,22 @@ python -m venv .venv
 python -m pip install -r backend/requirements.txt
 ```
 
-For macOS or Linux, activate the environment with `source .venv/bin/activate` instead.
+On macOS or Linux, activate the virtual environment with `source .venv/bin/activate`.
 
-### 2. Configure Gemini (optional, for AI features)
+### 2. Configure Gemini (optional)
 
-Create `backend/.env` from the example and add your key from [Google AI Studio](https://aistudio.google.com/apikey):
+Create `backend/.env` using the example file, then add a Gemini key from [Google AI Studio](https://aistudio.google.com/apikey):
 
 ```powershell
 Copy-Item backend/.env.example backend/.env
 notepad backend/.env
 ```
 
-Set `GEMINI_API_KEY=your-key` and save. **Never commit this file.** It is ignored by Git. The core dashboard can
-run without a Gemini key; Gemini-powered assistant and document-reading features need one.
+Set `GEMINI_API_KEY=your-key` in that local file. Never commit `.env`; it is excluded from Git and deployment uploads. The dashboard and sample analyses can run without a key; Gemini-powered features require one.
 
 ### 3. Start the backend
 
-Open a terminal at the repository root, then run:
+From the repository root:
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
@@ -187,12 +95,11 @@ python -m meterzero all
 uvicorn server.main:app --reload --port 8000
 ```
 
-The first command simulates the demo factory and trains its model. Leave this terminal running. The API is at
-<http://localhost:8000> and its health check is <http://localhost:8000/api/health>.
+The API is available at <http://localhost:8000>. Keep this terminal open.
 
 ### 4. Start the frontend
 
-Open a **second terminal** at the repository root:
+Open a second terminal at the repository root:
 
 ```powershell
 Set-Location frontend
@@ -200,74 +107,63 @@ npm ci
 npm run dev
 ```
 
-Open <http://localhost:5173>. Keep both terminals running while you use the app. The Vite development server
-forwards `/api` requests to the backend on port 8000.
-
-To run the built app through one local server, build the frontend with `npm --prefix frontend run build`, then
-start `uvicorn server.main:app --app-dir backend --port 8000` from the repository root and open
-<http://localhost:8000>.
+Open <http://localhost:5173>. The Vite development server forwards `/api` requests to the backend on port 8000.
 
 ## Deploy to Google Cloud Run
 
+Deploy from the repository root after authenticating with the Google Cloud account that has access to your project:
+
 ```powershell
 gcloud auth login
-.\deploy.ps1                       # reads the project and key from backend\.env  (macOS/Linux: ./deploy.sh PROJECT_ID)
+.\deploy.ps1 -Project YOUR_GOOGLE_CLOUD_PROJECT_ID
 ```
 
-The script enables the required services, stores the Gemini key in **Secret Manager**, and runs
-`gcloud run deploy --source .`. **Cloud Build** builds the [`Dockerfile`](Dockerfile) (frontend build, then the
-Python backend, then training the demo plant), and **Cloud Run** serves the app and API from one container that
-scales to zero. Step by step, with troubleshooting: **[DEPLOY.md](DEPLOY.md)**.
+The script enables the required Google Cloud services, builds the application with Cloud Build, stores the Gemini key in Secret Manager, and deploys the service to Cloud Run. It reads the project ID and key from `backend/.env` when available. Never commit that file or paste the key into source code.
+
+After deployment, use the service URL printed by the script to verify the application and Gemini connection:
+
+```text
+https://YOUR_CLOUD_RUN_URL/api/health
+https://YOUR_CLOUD_RUN_URL/api/ai/status
+```
+
+The health endpoint should return `ok: true`; the AI status endpoint reports whether Gemini is connected.
 
 ## Configuration
 
-All settings live in `backend/.env` (copied from [`backend/.env.example`](backend/.env.example)). It is ignored
-by git, the container build and the Cloud upload.
+Backend settings are read from `backend/.env`:
 
 | Variable | Purpose |
-|---|---|
-| `GEMINI_API_KEY` | Gemini API key from [Google AI Studio](https://aistudio.google.com/apikey) |
-| `GEMINI_MODEL` | Optional: which Gemini model to use |
-| `GOOGLE_CLOUD_PROJECT` | Project ID or number, used by `deploy.ps1` |
-| `GOOGLE_GENAI_USE_VERTEXAI` | `true` to use Gemini through Vertex AI instead of a key |
+| --- | --- |
+| `GEMINI_API_KEY` | Gemini API key for server-side AI features |
+| `GEMINI_MODEL` | Optional Gemini model override |
+| `GOOGLE_CLOUD_PROJECT` | Google Cloud project ID used by deployment tooling |
+| `GOOGLE_GENAI_USE_VERTEXAI` | Set to `true` to configure Gemini through Vertex AI |
 
-Users can also paste their own key in **Settings**; it stays in their browser.
+Users may also provide a Gemini key in the app's Settings page; a user-provided key is kept in that browser.
 
-## Project structure
+## Repository layout
 
-```
+```text
 backend/
-  meterzero/        the engine: simulation, models, reconciliation, savings, bills, regions, Gemini tools
-  server/           FastAPI: main.py (plants, views) · ai.py (Gemini) · prices.py · paperwork.py · store.py
-  tests/            backend test suite, including a fake Gemini client
-  scripts/          make_samples.py · make_bills.py · live_gemini_check.py
-  samples/          logbook and nameplate photos; six months of sample bills per region
+  meterzero/       Energy simulation, models, reconciliation, savings, and Gemini tools
+  server/          FastAPI routes and application services
+  tests/           Backend tests
+  samples/         Demo bills, logbooks, and equipment nameplates
 frontend/
-  src/pages/        one file per page; paperwork/ holds the bill, logbook and nameplate readers
-  src/twin/         Three.js scenes (plant twin, energy flow) and the twin's editor panels
-  src/components/   layout, sidebar, Ask MeterZero dock, shared UI
-  src/lib/          API client, formatting, shared hooks
-Dockerfile · deploy.ps1 · deploy.sh · DEPLOY.md
+  src/pages/       Overview, twin, bills, savings, scenarios, and settings
+  src/twin/        Three.js digital twin and energy-flow views
+  src/components/ Shared layout, navigation, and assistant UI
+docs/
+  architecture.svg MeterZero system architecture diagram
+Dockerfile         Combined frontend/backend Cloud Run image
+deploy.ps1         Windows Cloud Run deployment script
+deploy.sh          macOS/Linux Cloud Run deployment script
+DEMO.md            Prototype demo notes
 ```
 
-## Testing
+## Team
 
-```powershell
-cd backend
-pytest                                             # engine, API, bills, regions, and Gemini agent (fake client)
-python scripts/live_gemini_check.py                # the AI features against the real Gemini API, with a report
-python -m pyflakes meterzero server scripts tests  # lint
-npm --prefix ../frontend run lint                  # frontend lint; `run build` type-checks
-```
+**Green Mantis** · Susan Kafle · Sudin Kafle
 
-## Limitations
-
-- The results come from **simulated plants** with hidden meters, so every figure can be checked. Real plants are messier.
-- Training needs a few weeks of sub-metered history; a new site needs temporary meters for that time.
-- Look-alike cycling loads (chiller, compressor, dryer) cause most of the error, which is why the meter advice targets them.
-- Regional prices are typical examples, not a published tariff, until a real bill is loaded.
-- Gemini's wording varies between runs; its numbers come from the tools and are always shown.
-- Firebase Authentication and Cloud Firestore are not implemented. User data and custom plants are not backed by
-  a managed, shared database; Cloud Run instance storage is not a durable persistence layer.
-
-<div align="center"><sub>Built for the Google AI Builder Cup · Manufacturing and Sustainability</sub></div>
+<div align="center"><sub>Built for the Google AI Builder Cup</sub></div>
